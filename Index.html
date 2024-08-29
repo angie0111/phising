@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Google</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-image 0.5s ease;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 360px;
+            position: relative;
+        }
+        .container img {
+            width: 75px;
+            margin-bottom: 20px;
+        }
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #202124;
+        }
+        input[type="text"], input[type="password"], input[type="date"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a73e8;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #1669c1;
+        }
+        .container p {
+            color: #5f6368;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        .container a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .container a:hover {
+            text-decoration: underline;
+        }
+        .advertencia-container {
+            display: none;
+            color: #070707;
+            position: relative;
+        }
+        .advertencia-container img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+        .advertencia-container video {
+            width: 100%;
+            max-height: 300px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+        #informacionPhishing {
+            margin-top: 20px;
+            text-align: left;
+            display: none; /* Hide by default */
+        }
+    </style>
+</head>
+<body id="body">
+    <!-- Login inicial -->
+    <div class="container" id="loginContainer">
+        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Logo">
+        <h1>Iniciar Sesión</h1>
+        <form id="loginForm">
+            <input type="text" placeholder="Correo electrónico o teléfono" required><br>
+            <input type="password" placeholder="Contraseña" required><br>
+            <button type="submit">Siguiente</button>
+        </form>
+        <p><a href="#">¿Olvidaste tu correo electrónico?</a></p>
+        <p><a href="#">¿Necesitas ayuda?</a></p>
+    </div>
+
+    <!-- Formulario de asistencia -->
+    <div class="container" id="formularioAsistencia" style="display:none;">
+        <h1>Formulario de Asistencia</h1>
+        <form id="asistenciaForm">
+            <input type="text" placeholder="Nombre" required><br>
+            <input type="text" placeholder="Apellido" required><br>
+            <input type="date" placeholder="Fecha de Nacimiento" required><br>
+            <input type="number" placeholder="Número de Identificación" required><br>
+            <input type="text" placeholder="Colegio" required><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Advertencia de phishing -->
+    <div class="container advertencia-container" id="advertenciaContainer">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="Warning Icon">
+        <h1>Advertencia de Phishing</h1>
+        <p>Has ingresado tus datos en un sitio no seguro. Por favor, no compartas información sensible en páginas desconocidas.</p>
+        <video autoplay loop controls>
+            <source src="video_anonymous.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+        <button id="masInformacion">Más Información</button>
+        <div id="informacionPhishing">
+            <p>Para evitar caer en ataques de phishing, sigue estas recomendaciones:</p>
+            <ul>
+                <li>Verifica siempre la URL del sitio web.</li>
+                <li>No compartas información personal en sitios sospechosos.</li>
+                <li>Utiliza contraseñas seguras y únicas para cada cuenta.</li>
+                <li>Activa la autenticación de dos factores siempre que sea posible.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar el formulario de asistencia después de iniciar sesión
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('formularioAsistencia').style.display = 'block';
+        });
+
+        // Mostrar advertencia de phishing después de enviar el formulario de asistencia
+        document.getElementById('asistenciaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('formularioAsistencia').style.display = 'none';
+            document.getElementById('advertenciaContainer').style.display = 'block';
+            document.getElementById('body').style.backgroundImage = "url('anonimous.jfif')"; // Imagen de fondo local
+            document.getElementById('body').style.backgroundSize = 'cover';
+        });
+
+        // Mostrar más información sobre phishing
+        document.getElementById('masInformacion').addEventListener('click', function() {
+            var info = document.getElementById('informacionPhishing');
+            if (info.style.display === 'none') {
+                info.style.display = 'block';
+            } else {
+                info.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
